@@ -1,0 +1,60 @@
+- name: Install neofetch and change login message
+  hosts: "all"
+  become: true
+  tasks:
+    - name: Install neofetch debian/ubuntu
+      apt:
+        name: neofetch
+        state: present
+      when:
+        - ansible_os_family == "Debian"
+        - ansible_distribution == "Ubuntu"
+    - name: Install neofetch centos
+      apt:
+        name: neofetch
+        state: present
+      when:
+        - ansible_os_family == "RedHat"
+        - ansible_distribution == "CentOS"
+    # Set Variables
+    - name: Task variable mymotd.sh
+      stat:
+        path: /etc/profile.d/mymotd.sh
+      register: mymotd
+    - name: Task variable /etc/motd
+      stat:
+        path: /etc/motd
+      register: motd
+    - name: Task variable motd.d/
+      stat:
+        path: /etc/update-motd.d/*
+      register: updatemotd
+    # Actions 
+    - name: Move /etc/motd
+      command: mv /etc/motd /etc/motd.old
+      when: motd.stat.exists
+    - name: Remove /etc/update-motd.d
+      shell: chmod -x /etc/update-motd.d/*
+      when: updatemotd.stat.exists
+    - name: Execute neofetch Login
+      ansible.builtin.shell: echo "neofetch" >> /etc/profile.d/mymotd.sh && chmod +x /etc/profile.d/mymotd.sh
+      when: not mymotd.stat.exists
+    - name: Copy a new "conf" file into place, backing up the original if it differs
+      #when: inventory_hostname in lookup('inventory_hostnames', 'proxmox:servers')
+      copy:
+        src: ~/.ansible/playbooks/config-neofetch
+        dest: ~/.config/neofetch/config.conf
+        backup: yes
+    #- name: Copy 2 a new "conf" file into place, backing up the original if it differs
+      #when: inventory_hostname in lookup('inventory_hostnames', 'dockers:pi_hole')
+      #copy:
+        #src: ~/.ansible/playbooks/config-neofetch
+        #dest: ~/.config/neofetch/config.conf
+      #vars:
+        #ansible_become: false
+        #backup: yes
+    #- name: hushlogin
+    #  when: inventory_hostname in lookup('inventory_hostnames', 'dockers:pi_hole')
+    #  command: touch ~/.hushlogin
+    #  vars:
+    #    ansible_become: false

@@ -1,0 +1,9 @@
+- name: update ubuntu systems
+  hosts: "ubuntu"
+  become: yes
+  tasks:
+    - name: Update apt repo and cache
+      when: inventory_hostname in lookup('inventory_hostnames', 'dockers:pi_hole')
+	  apt:
+        update_cache: yes
+        upgrade: 'yes'

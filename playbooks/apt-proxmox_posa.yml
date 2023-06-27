@@ -1,0 +1,8 @@
+- name: update proxmox systems
+  hosts: "proxmox_posa"
+  become: no
+  tasks:
+    - name: Update apt repo and cache
+      apt:
+        update_cache: yes
+        upgrade: 'yes'
