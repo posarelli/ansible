@@ -49,7 +49,7 @@
     - name: Copy a new "conf" file into place, backing up the original if it differs
       #when: inventory_hostname in lookup('inventory_hostnames', 'proxmox:servers')
       copy:
-        src: ~/.ansible/playbooks/config-neofetch
+        src: https://github.com/posarelli/ansible/blob/main/playbooks/config-neofetch
         dest: ~/.config/neofetch/config.conf
         backup: yes
     #- name: Copy 2 a new "conf" file into place, backing up the original if it differs
