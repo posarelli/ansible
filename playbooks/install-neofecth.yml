@@ -49,19 +49,6 @@
     - name: Copy a new "conf" file into place, backing up the original if it differs
       #when: inventory_hostname in lookup('inventory_hostnames', 'proxmox:servers')
       copy:
-        src: https://github.com/posarelli/ansible/blob/main/playbooks/config-neofetch
+        src: ~/.ansible/playbooks/config-neofetch
         dest: ~/.config/neofetch/config.conf
         backup: yes
-    #- name: Copy 2 a new "conf" file into place, backing up the original if it differs
-      #when: inventory_hostname in lookup('inventory_hostnames', 'dockers:pi_hole')
-      #copy:
-        #src: ~/.ansible/playbooks/config-neofetch
-        #dest: ~/.config/neofetch/config.conf
-      #vars:
-        #ansible_become: false
-        #backup: yes
-    #- name: hushlogin
-    #  when: inventory_hostname in lookup('inventory_hostnames', 'dockers:pi_hole')
-    #  command: touch ~/.hushlogin
-    #  vars:
-    #    ansible_become: false
