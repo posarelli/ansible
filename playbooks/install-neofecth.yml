@@ -2,6 +2,13 @@
   hosts: "all"
   become: true
   tasks:
+    - ping:
+      register: ping_result
+      ignore_unreachable: true
+    - fail:
+        msg: "Controlla i server che non rispondono"
+      when: ping_result.unreachable is defined
+      any_errors_fatal: true
     - name: Install neofetch debian/ubuntu
       apt:
         name: neofetch

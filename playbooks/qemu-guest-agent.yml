@@ -1,6 +1,13 @@
 - name: install latest qemu-guest-agent
   hosts: "ubuntu"
   tasks:
+    - ping:
+      register: ping_result
+      ignore_unreachable: true
+    - fail:
+        msg: "Controlla i server che non rispondono"
+      when: ping_result.unreachable is defined
+      any_errors_fatal: true
     - name: install qemu-guest-agent
       apt:
         name: qemu-guest-agent
