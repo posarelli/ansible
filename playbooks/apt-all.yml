@@ -1,4 +1,4 @@
-- name: update proxmox systems
+- name: update all systems
   hosts: "*"
   become: yes
   tasks:
