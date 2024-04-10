@@ -1,4 +1,4 @@
-- name: Install htop
+- name: Install btop
   hosts: "*"
   become: yes
   tasks:
