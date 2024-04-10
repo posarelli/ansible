@@ -2,7 +2,7 @@
   hosts: "*"
   become: yes
   tasks:
-    - name: Install htop
+    - name: Install btop
       apt:
         update_cache: yes
         name: btop
