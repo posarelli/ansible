@@ -5,5 +5,5 @@
     - name: Install htop
       apt:
         update_cache: yes
-        name: htop
+        name: btop
         state: present
