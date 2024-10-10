@@ -7,3 +7,18 @@
         update_cache: yes
         name: btop
         state: present
+    - name: Install htop
+      apt:
+        update_cache: yes
+        name: htop
+        state: present
+    - name: Install ping
+      apt:
+        update_cache: yes
+        name: inetutils-ping
+        state: present
+    - name: Install nano
+      apt:
+        update_cache: yes
+        name: nano
+        state: present
