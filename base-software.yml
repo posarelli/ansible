@@ -1,9 +1,0 @@
-- name: Install btop
-  hosts: "*"
-  become: yes
-  tasks:
-    - name: Install btop
-      apt:
-        update_cache: yes
-        name: btop
-        state: present
