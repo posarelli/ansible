@@ -1,5 +1,5 @@
 - name: update proxmox systems
-  hosts: "all"
+  #hosts: "all"
   become: yes
   tasks:
     - ping:
