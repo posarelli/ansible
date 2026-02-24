@@ -21,6 +21,11 @@
                   - ca-certificates 
                   - curl
                   - gnupg
+                  - apt-transport-https
+                  - git
+                  - gpg
+                  - software-properties-common
+
                 state: latest
                 update_cache: yes
             - name: Add GPG key
