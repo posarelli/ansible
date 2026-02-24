@@ -1,12 +1,7 @@
 - hosts: "{{ hosts }}"
   name: Installing Docker
   tasks:
-    - name: Check if Docker is installed
-      become: yes
-      command: docker -v 
-      register: docker_installed
-      ignore_errors: true
-   
+  
     - name: Install Docker 
       become: yes
       block:
